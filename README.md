@@ -1,6 +1,8 @@
 # AIChatBot Firetruck
 
 ![Main Image](AIChatBot.png)
+
+
 Designed, engineered and documented by **BotyB**
 
 [---]
@@ -40,7 +42,7 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 # What You Need with AliExpress Links
 
-![FireTruck Dismantled](35.png)
+![FireTruck](35.png)
 
 ## Mandatory Components
 
@@ -70,7 +72,7 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 # Power Architecture
 
-[Power Layout](Pinout.png)
+[PowerLayout](Pinout.png)
 
 **Advice: Please note that the capatiors marked 470uF/1000uF + 104 are 2 different capacitors soldered together**
 
@@ -86,11 +88,11 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 **Legend: 470µF are Electrolytic Capacitors 10v or max 16v and 100nF are Ceramic 104 Capacitors**
 *o.1 -> You can up 470µF to 680-1000 µF if module stops randomly*
 
-![BoostConverter](9.png)
+![](9.png)
 
 [---]
 
-![GluedSpeaker](17.png)
+![](17.png)
 
 ### Why This Works
 
@@ -127,7 +129,6 @@ Before connecting ESP32:
 2. Use multimeter on output.
 3. Adjust potentiometer until output reads exactly **5.00V**.
 
-[DROP_IMAGE_HERE: boost_converter_adjustment.jpg]
 
 Never connect ESP32 before verifying output voltage.
 
@@ -135,7 +136,7 @@ Never connect ESP32 before verifying output voltage.
 
 # IMNP441 Mic Module Testing Code via Arduino and 1x ESP32 (any variant)
 
-![ESP32MicTest](33.png)
+![](33.png)
 
 # TP4056 Resistor Modification (200mA Charging)
 
