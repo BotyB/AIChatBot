@@ -3,7 +3,6 @@
 ![Main Image](images/AIChatBot.png)
 
 
-Designed, engineered and documented by **BotyB**
 
 [---]
 
