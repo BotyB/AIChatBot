@@ -142,6 +142,106 @@ Never connect ESP32 before verifying output voltage.
 
 # IMNP441 Mic Module Testing Code via Arduino and 1x ESP32 (any variant)
 
+You can use the code below to test your mic modeule. I have found that some IMNP441 modules especially cheap ones come with re-used ICs or lasered-off serials so there threshold starts from 1000 in a silent room. On a good module it starts around 100 if silentce and jumps to 1500-2000+ if you speak in the MIC from 20cm.
+
+**Drop in Arduino and flash on the ESP32 via USB. Do not forget to keep pressing "Boot" button until it shows "UPLOADING" then release. Some boards need to be pressed some not.**
+
+[--Test Code Below--]
+
+#include <driver/i2s.h>
+
+/*
+INMP441 (I2S mic) sensitivity test
+
+What you change per board:
+- Only the three pin defines below (I2S_WS, I2S_SD, I2S_SCK).
+- Everything else can stay the same.
+
+Wiring reminder (INMP441 -> ESP32):
+- VDD  -> 3.3V
+- GND  -> GND
+- SCK  -> I2S_SCK  (BCLK)
+- WS   -> I2S_WS   (LRCLK / WS)
+- SD   -> I2S_SD   (DATA OUT from mic)
+- L/R  -> GND      --> forces LEFT channel (matches I2S_CHANNEL_FMT_ONLY_LEFT)
+
+If you set L/R to 3.3V (RIGHT channel), then change:
+  .channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT;   --> Change to RIGHT
+or read both channels (more advanced).
+*/
+
+// --> Change to the GPIO you actually wired on THIS board:
+#define I2S_WS   25   // LRCLK / WS pin from mic
+#define I2S_SD   33   // DATA pin from mic
+#define I2S_SCK  26   // BCLK / SCK pin from mic
+
+/*
+Board notes (choose any free GPIOs, then set the defines above):
+
+ESP32-WROOM-32 (30-pin / 38-pin):
+- Almost any normal GPIO works.
+- Avoid GPIOs 6-11 (used by flash).
+- Good safe choices: 25, 26, 33 (as shown).
+
+ESP32-S3 SuperMini:
+- You must use GPIO numbers that exist on your S3 board and are broken out.
+- Avoid pins reserved/used for USB, flash/PSRAM, or not exposed on the module.
+- Pick three available GPIOs on the SuperMini and set them in the defines above.
+*/
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+
+  i2s_config_t i2s_config = {
+    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),
+    .sample_rate = 16000,
+    .bits_per_sample = I2S_BITS_PER_SAMPLE_32BIT,
+    .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,      // --> Change to ONLY_RIGHT if L/R is tied to 3.3V
+    .communication_format = I2S_COMM_FORMAT_STAND_I2S, // If this fails to compile on some cores: --> Change to I2S_COMM_FORMAT_I2S
+    .intr_alloc_flags = 0,
+    .dma_buf_count = 4,
+    .dma_buf_len = 256,
+    .use_apll = false
+  };
+
+  i2s_pin_config_t pin_config = {
+    .bck_io_num = I2S_SCK,             // --> Change via the define above
+    .ws_io_num = I2S_WS,               // --> Change via the define above
+    .data_out_num = I2S_PIN_NO_CHANGE, // Mic test is RX only
+    .data_in_num = I2S_SD              // --> Change via the define above
+  };
+
+  i2s_driver_install(I2S_NUM_0, &i2s_config, 0, NULL);
+  i2s_set_pin(I2S_NUM_0, &pin_config);
+
+  Serial.println("Mic test started...");
+}
+
+void loop() {
+  int32_t sampleBuffer[256];
+  size_t bytesRead;
+
+  i2s_read(I2S_NUM_0, &sampleBuffer, sizeof(sampleBuffer), &bytesRead, portMAX_DELAY);
+
+  int32_t maxVal = 0;
+  for (int i = 0; i < 256; i++) {
+    // INMP441 delivers 24-bit audio in a 32-bit frame.
+    // Shift right to make the printed numbers easier to compare between modules.
+    int32_t val = abs(sampleBuffer[i] >> 14);
+    if (val > maxVal) maxVal = val;
+  }
+
+  // Interpretation:
+  // - Quiet room: low numbers (often ~50-200 on a "good" module).
+  // - Speaking near mic: thousands.
+  Serial.println(maxVal);
+}
+
+
+[-Test Code Above-]
+
+
 ![](images/33.jpeg)
 
 # TP4056 Resistor Modification (200mA Charging)
@@ -322,8 +422,5 @@ No analog mic preamp required.
 
 
 [---]
-
-
-# Built By
-
-Designed and built by ***BotyB***
+I hope you enjoyed this project as well as me and you could finish it succesfully. ^_^
+# Built and Designed by ***BotyB***
