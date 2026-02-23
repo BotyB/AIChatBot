@@ -42,7 +42,7 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 # What You Need with AliExpress Links
 
-![FireTruck](35.png)
+![FireTruck](35.jpeg)
 
 ## Mandatory Components
 
@@ -72,7 +72,7 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 # Power Architecture
 
-[PowerLayout](Pinout.png)
+[PowerLayout](Pinout.jpeg)
 
 **Advice: Please note that the capatiors marked 470uF/1000uF + 104 are 2 different capacitors soldered together**
 
@@ -88,11 +88,11 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 **Legend: 470µF are Electrolytic Capacitors 10v or max 16v and 100nF are Ceramic 104 Capacitors**
 *o.1 -> You can up 470µF to 680-1000 µF if module stops randomly*
 
-![](9.png)
+![](9.jpeg)
 
 [---]
 
-![](17.png)
+![](17.jpeg)
 
 ### Why This Works
 
@@ -136,7 +136,7 @@ Never connect ESP32 before verifying output voltage.
 
 # IMNP441 Mic Module Testing Code via Arduino and 1x ESP32 (any variant)
 
-![](33.png)
+![](33.jpeg)
 
 # TP4056 Resistor Modification (200mA Charging)
 
@@ -144,13 +144,13 @@ Never connect ESP32 before verifying output voltage.
 
 *If not using a tiny battery or you have a TP4056 set to 500mAh charge you can skip this part*
 
-![TP4056R3Closeup](26.png)
+![TP4056R3Closeup](26.jpeg)
 
 The TP4056 R3 resistor controls charging current.
 
 Stock modules often charge at 1A — too high for 800mAh cell.
 
-![TP4056R3](30.png)
+![TP4056R3](30.jpeg)
 
 --> *Please read this before starting to work on R3 Resistor* <--
 
