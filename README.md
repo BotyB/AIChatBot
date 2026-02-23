@@ -72,7 +72,7 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 # Power Architecture
 
-[](Pinout.png)
+[Power](Pinout.png)
 
 **Advice: Please note that the capatiors marked 470uF/1000uF + 104 are 2 different capacitors soldered together**
 
@@ -88,11 +88,11 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 **Legend: 470µF are Electrolytic Capacitors 10v or max 16v and 100nF are Ceramic 104 Capacitors**
 *o.1 -> You can up 470µF to 680-1000 µF if module stops randomly*
 
-![](9.jpeg)
+![Boost](9.jpeg)
 
 [---]
 
-![](17.jpeg)
+![FiretruckInside](17.jpeg)
 
 ### Why This Works
 
