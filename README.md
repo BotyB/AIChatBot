@@ -74,7 +74,7 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 
 
-[Power](Pinout.png)
+[1](Pinout.png)
 
 
 [---]
