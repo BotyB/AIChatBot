@@ -72,7 +72,7 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 # Power Architecture
 
-[PowerLayout](Pinout.jpeg)
+[](Pinout.png)
 
 **Advice: Please note that the capatiors marked 470uF/1000uF + 104 are 2 different capacitors soldered together**
 
@@ -144,7 +144,7 @@ Never connect ESP32 before verifying output voltage.
 
 *If not using a tiny battery or you have a TP4056 set to 500mAh charge you can skip this part*
 
-![TP4056R3Closeup](26.jpeg)
+![](26.jpeg)
 
 The TP4056 R3 resistor controls charging current.
 
@@ -215,7 +215,7 @@ This protects:
 * Keep I2S lines short
 * Keep boost converter physically separated from microphone
 
-[Wire](6.jpeg)
+[](6.jpeg)
 
 Twisting wires reduces:
 
@@ -229,8 +229,8 @@ Twisting wires reduces:
 
 Before sealing inside chassis, build and test on breadboard.
 
-[Breadbord](34.jpeg)
-[Breadbord2](27.jpeg)
+[](34.jpeg)
+[](27.jpeg)
 
 Test for:
 
