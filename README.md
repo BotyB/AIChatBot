@@ -72,7 +72,13 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 # Power Architecture
 
+
+
 [Power](Pinout.png)
+
+
+[---]
+
 
 **Advice: Please note that the capatiors marked 470uF/1000uF + 104 are 2 different capacitors soldered together**
 
