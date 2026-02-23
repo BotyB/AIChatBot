@@ -1,15 +1,14 @@
 # 🚒 AIChatBot Firetruck
 
-[AIChatBot.png]
+![Main Image](AIChatBot.png)
 
-#
+[---]
 
 # ESP32-S3 Voice Assistant using Xiaozhi API (Xiaozhi Lite, DeepSeek Quantized, DauBao 2.0)
 
 A compact, battery-powered AI voice assistant built inside a firetruck chassis using an ESP32-S3 Supermini, I2S microphone INMP441 , I2S amplifier MAX98357A ,0.96" OLED display , boost converter from 3.7v to 5v, a li-Ion battery 3.7v 800 mAh, TP4056 Charging module and a properly decoupled mixed digital/audio power system.
 
 Designed, engineered and documented by **BotyB**
-Co-engineered with **Brother Thovian**
 
 [---]
 
@@ -20,9 +19,9 @@ This project is a fully functional voice chatbot built around:
 * ESP32-S3 Supermini
 * INMP441 I2S digital microphone
 * MAX98357A I2S audio amplifier
-* 0.96” OLED (I2C)
+* 0.96” OLED (I2C) -> (When searching do check for display to have **4** pins not 8)
 * TP4056 Li-Ion charger (modified to 200mA)
-* Samsung 3.7V 800mAh Li-Ion battery
+* Samsung 3.7V 800mAh Li-Ion battery -> (You can use any space battery you have with good health)
 * Boost converter set to 5V
 * Proper decoupling & star-ground topology
 
@@ -33,38 +32,39 @@ This build focuses on:
 * WiFi reliability
 * Professional grounding
 * Clean enclosure integration
+* Proof of concept for a toy integrated AIChatBot
 
 It may look so but this is not a “toy project”. It is a properly engineered, compact mixed-signal embedded system.
 
 [---]
 
-# 🧰 What You Need
+# What You Need with AliExpress examples
 
-## 🔩 Mandatory Components
+## Mandatory Components
 
-* ESP32-S3 Supermini
-* INMP441 microphone
-* MAX98357A amplifier
-* 4–5 × 100nF ceramic capacitors (104)
-* 3–4 × 470µF electrolytic capacitors
-* TP4056 charging module
-* R3 resistor (adjusted for 200mA charging)
-* Boost converter (3.7V → 5V)
-* 3.7V Li-Ion battery (800mAh used here)
-* 0.96” OLED (SSD1306 I2C)
-* 4Ω speaker
-* Proper wiring
+* ESP32-S3 Supermini                             -> Link : https://shorturl.at/zLChx
+* INMP441 microphone                             -> Link : https://shorturl.at/EX8jN
+* MAX98357A amplifier                            -> Link : https://shorturl.at/SnJsn
+*Ceramic Capacitors (104)                        -> Link : https://shorturl.at/riOb9
+* Electrolytic Capacitors Kit                    -> Link : https://shorturl.at/HwgME
+* TP4056 charging module                         -> Link : https://shorturl.at/miefV
+* Resistor Kit (adjusted for 200mA charging)     -> Link : https://shorturl.at/NT6mV
+* Boost converter (3.7V → 5V)                    -> Link : https://tinyurl.com/4dsx7dfj
+* 3.7V Li-Ion battery (800mAh used here)         -> Link : https://tinyurl.com/yyrns89w 
+* 0.96” OLED (SSD1306 I2C)                       -> Link : https://tinyurl.com/y2un2hme
+* 4-8 Ω  2W speaker                              -> Link : https://tinyurl.com/zsnsfz8t or https://tinyurl.com/299k8ejv
 
----
+
+[---]
 
 ## 🧪 Optional but Recommended
 
 * Heat shrink tubing
 * Silicone glue for vibration resistance
 * Multimeter (mandatory for voltage tuning)
-* Oscilloscope (if you want to be obsessive)
 
----
+
+[---]
 
 # 🔌 Power Architecture
 
@@ -74,23 +74,25 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 | Location     | Value         | Purpose                |
 | ------------ | ------------- | ---------------------- |
-| Battery Rail | 470µF         | Input stabilization    |
-| Boost Output | 470µF         | Switching smoothing    |
-| MAX98357A    | 470µF + 100nF | Audio spike absorption |
+| Battery Rail | 470µF + 100nF | Input stabilization    |
+| Boost Output | 470µF + 100nF | Switching smoothing    |
+| MAX98357A    | 470µF + 100nF | Audio spike absorption | -> o.1
 | ESP32 Rail   | 470µF + 100nF | WiFi burst buffering   |
-| Distributed  | 4–5 × 100nF   | Local decoupling       |
+
+**Legend: 470µF are Electrolytic Capacitors 10v or max 16v and 100nF are Ceramic 104 Capacitors**
+*o.1 -> You can up 470µF to 680-1000 µF if module stops randomly*
 
 ### Why This Works
 
 * Input cap stabilizes battery
 * Boost output cap smooths switching
 * MAX cap absorbs audio spikes
-* ESP cap handles WiFi bursts
+* ESP32 cap handles WiFi bursts
 * Star ground prevents ground noise
 
 This is a properly decoupled mixed digital/audio system.
 
----
+[---]
 
 # ⚡ Star Grounding Strategy
 
@@ -105,7 +107,7 @@ This prevents:
 * Mic noise under WiFi load
 * Brownouts during audio peaks
 
----
+[---]
 
 # 🔧 Boost Converter Setup (Set to 5V)
 
@@ -119,7 +121,7 @@ Before connecting ESP32:
 
 ⚠️ Never connect ESP32 before verifying output voltage.
 
----
+[---]
 
 # 🔋 TP4056 Resistor Modification (200mA Charging)
 
@@ -131,9 +133,11 @@ We modified R3 to limit charging to ~200mA.
 
 Formula:
 
-```
+[---]
+
 I_charge = 1000V / R3 (kΩ)
-```
+
+[---]
 
 For ~200mA, use ~5kΩ equivalent.
 
@@ -145,7 +149,7 @@ This protects:
 * Thermal stability
 * Safety inside enclosure
 
----
+[---]
 
 # 🧵 Wiring Best Practices
 
@@ -200,22 +204,27 @@ If boot fails:
 # 🌐 Xiaozhi API Integration
 
 This project uses the Xiaozhi API for AI chat functionality.
+The project is using **TanDev's** Flasher and Text-to-Speech backend so all credits are going for him for letting me use his flasher
 
-All credits for AI backend and conversational engine go to:
+All credits for AI backend and conversational engine go to:  
 
-👉 Xiaozhi AI Team
+https://xiaozhi.me/login?redirect=/console/agents
 
-This project integrates the API but does not claim ownership of the service.
+https://tandev.click
+
+This project integrates the API but does not claim ownership of the service. All services and credits regarding AI Agents go to Xiaozhi AI Team, DeepSeek AI Team.
 
 Users must:
 
 * Register with Xiaozhi
 * Obtain API credentials
 * Configure WiFi + API keys in firmware
+* Configure Agent as pleased
+* Re-flash Online, if connected you can directly change the settings.
 
 ---
 
-# 📝 How to Register & Configure
+# How to Register & Configure
 
 1. Create Xiaozhi account.
 2. Generate API key.
@@ -223,13 +232,10 @@ Users must:
 4. Flash updated firmware.
 5. Restart device.
 
-[DROP_IMAGE_HERE: api_configuration.jpg]
 
-⚠️ Never upload API keys to GitHub.
+[---]
 
----
-
-# 🔊 Audio System
+# Audio System
 
 INMP441 → I2S → ESP32
 ESP32 → I2S → MAX98357A → Speaker
@@ -240,46 +246,22 @@ No analog mic preamp required.
 
 [DROP_IMAGE_HERE: audio_signal_flow.jpg]
 
----
+[---]
 
-# 🎯 Lessons Learned
+# Lessons Learned
 
-* Bulk capacitance matters.
-* Star grounding matters even more.
-* Boost converters need proper smoothing in audio systems.
-* Charging current must match battery capacity.
-* Twisted wiring significantly reduces interference.
+* Bulk capacitance matters. (Always solder capacitors directly ON module pins and sometimes INLINE)
+* Star grounding matters even more. Especially as close as possible to MAIN power Rail e.g. Buck OUT pins, short wires
+* Boost converters need proper smoothing in audio systems. Some modules have high sudden drain so they need capacitors for sudden spikes 
+* Charging current must match battery capacity. Never Charge small batteries 400 mAh with e.g. 1A, it will overheat or enev blow up on you!
+* Twisted wiring significantly reduces interference. Always twist GND and VCC together to cancel any EMI it might pick up
 * Mixed digital/audio systems require intentional layout.
 
----
 
-# 🚀 Future Improvements
+[---]
 
-* Custom PCB
-* Better enclosure thermal routing
-* Larger battery option
-* Offline speech model integration
-* OTA firmware updates
 
----
+# Built By
 
-# 🏷 Built By
-
-Designed and built by **Boty Von**
-System architecture & co-engineering: *Brother Thovian* ⚙️
-
-Codename preserved for archival continuity.
-
----
-
-Brother…
-
-This README now reads like an engineered embedded system project — not a weekend Arduino experiment.
-
-If you want next, we can:
-
-* Make it slightly more corporate (for recruiters)
-* Or slightly more Adeptus Mechanicus
-* Or prepare a second version optimized for CV portfolio
-
-Your move.
+Designed and built by ***BotyB***
+System architecture & co-engineering: *Brother Thovian*
