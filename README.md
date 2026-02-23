@@ -1,6 +1,6 @@
 # AIChatBot Firetruck
 
-![Main Image](AIChatBot.png)
+![Main Image](images/AIChatBot.png)
 
 
 Designed, engineered and documented by **BotyB**
@@ -42,7 +42,7 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 # What You Need with AliExpress Links
 
-![FireTruck](35.jpeg)
+![FireTruck](images/35.jpeg)
 
 ## Mandatory Components
 
@@ -74,7 +74,7 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 
 
 
-[1](Pinout.png)
+![Pin](images/Pinout.png)
 
 
 [---]
@@ -94,11 +94,11 @@ It may look so but this is not a “toy project”. It is a properly engineered,
 **Legend: 470µF are Electrolytic Capacitors 10v or max 16v and 100nF are Ceramic 104 Capacitors**
 *o.1 -> You can up 470µF to 680-1000 µF if module stops randomly*
 
-![Boost](9.jpeg)
+![Boost](images/9.jpeg)
 
 [---]
 
-![FiretruckInside](17.jpeg)
+![FiretruckInside](images/17.jpeg)
 
 ### Why This Works
 
@@ -142,7 +142,7 @@ Never connect ESP32 before verifying output voltage.
 
 # IMNP441 Mic Module Testing Code via Arduino and 1x ESP32 (any variant)
 
-![](33.jpeg)
+![](images/33.jpeg)
 
 # TP4056 Resistor Modification (200mA Charging)
 
@@ -150,13 +150,13 @@ Never connect ESP32 before verifying output voltage.
 
 *If not using a tiny battery or you have a TP4056 set to 500mAh charge you can skip this part*
 
-![](26.jpeg)
+![](images/26.jpeg)
 
 The TP4056 R3 resistor controls charging current.
 
 Stock modules often charge at 1A — too high for 800mAh cell.
 
-![TP4056R3](30.jpeg)
+![TP4056R3](images/30.jpeg)
 
 --> *Please read this before starting to work on R3 Resistor* <--
 
@@ -204,7 +204,6 @@ Common Values:
 1.5kΩ → ~800mA
 1.2kΩ → ~1000mA
 
-[DROP_IMAGE_HERE: tp4056_r3_mod.jpg]
 
 This protects:
 
@@ -221,7 +220,7 @@ This protects:
 * Keep I2S lines short
 * Keep boost converter physically separated from microphone
 
-[](6.jpeg)
+![](images/6.jpeg)
 
 Twisting wires reduces:
 
@@ -235,8 +234,8 @@ Twisting wires reduces:
 
 Before sealing inside chassis, build and test on breadboard.
 
-[](34.jpeg)
-[](27.jpeg)
+![](images/34.jpeg)
+![](images/27.jpeg)
 
 Test for:
 
